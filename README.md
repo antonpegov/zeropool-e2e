@@ -44,4 +44,9 @@ services:
 `./make <test_name_from_Makefile>`
 ```
 
+## Debugging
+
+1. Install [Visual Studio Code](https://code.visualstudio.com/)
+2. Install [Robot Framework Language Server](https://marketplace.visualstudio.com/items?itemName=TomiTurtiainen.rf-language-server)
+
 \*\*\* Note: `Make` and `Makefile` used to run tests in parallel. Special subscription required for parallel testing.

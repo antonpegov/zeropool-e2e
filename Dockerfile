@@ -6,7 +6,7 @@ LABEL description Robot Framework with LambdaTest running on Docker
 # Set environment variables
 ENV ROBOT_RESOURCES_DIR /robot/resources
 ENV ROBOT_TESTS_DIR /robot/tests
-ENV ROBOT_WORK_DIR /robot/temp
+ENV ROBOT_WORK_DIR /robot
 ENV ROBOT_LOGS_DIR /robot/logs
 
 # Create directories
@@ -21,8 +21,8 @@ COPY ./resources ${ROBOT_RESOURCES_DIR}
 COPY requirements.txt ${ROBOT_WORK_DIR}/requirements.txt
 COPY Makefile ${ROBOT_WORK_DIR}/Makefile
 COPY make.exe ${ROBOT_WORK_DIR}/make.exe
-COPY ./bin/runme.sh ${ROBOT_WORK_DIR}/runme.sh
-RUN chmod +x ${ROBOT_WORK_DIR}/runme.sh
+COPY run.sh ${ROBOT_WORK_DIR}/run.sh
+RUN chmod +x ${ROBOT_WORK_DIR}/run.sh
 
 # A dedicated work folder to allow for the creation of temporary files
 WORKDIR ${ROBOT_WORK_DIR}
@@ -34,5 +34,5 @@ RUN . venv/bin/activate
 RUN python3 -m pip install -r requirements.txt
 
 # Execute tests
-ENTRYPOINT ["./runme.sh"]
+ENTRYPOINT ["./run.sh"]
 
