@@ -1,4 +1,5 @@
 docker-compose.yaml
+interactive_console_output.xml
 output.xml
 report.html
 log.html

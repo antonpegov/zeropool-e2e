@@ -20,9 +20,12 @@ services:
 
 4. Run `docker-compose up -d` to start the container
 
-# Start local development
+# Debug tests locally
 
-## Prerequisites
+1. Install [Visual Studio Code](https://code.visualstudio.com/)
+2. Install [Robot Framework Language Server](https://marketplace.visualstudio.com/items?itemName=TomiTurtiainen.rf-language-server) plugin
+
+# Run tests locally on Lambdatest grid (without docker)
 
 1. Create an account on [LambdaTest](https://www.lambdatest.com/)
 2. Get the username and access key
@@ -38,15 +41,26 @@ services:
 `pip install -r requirements.txt`
 ```
 
-## Run tests locally
+4. Set LambdaTest Username and Access Key in environment variables.
+
+- For Linux/macOS:
+
+```bash
+export LT_USERNAME= undefined
+export LT_ACCESS_KEY= undefined
+```
+
+- For Windows:
+
+```bash
+set LT_USERNAME= undefined
+set LT_ACCESS_KEY= undefined
+```
+
+5. Run tests
 
 ```bash
 `./make <test_name_from_Makefile>`
 ```
-
-## Debugging
-
-1. Install [Visual Studio Code](https://code.visualstudio.com/)
-2. Install [Robot Framework Language Server](https://marketplace.visualstudio.com/items?itemName=TomiTurtiainen.rf-language-server)
 
 \*\*\* Note: `Make` and `Makefile` used to run tests in parallel. Special subscription required for parallel testing.
