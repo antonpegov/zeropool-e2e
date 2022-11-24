@@ -5,12 +5,14 @@ LABEL description Robot Framework with LambdaTest running on Docker
 
 # Set environment variables
 ENV ROBOT_RESOURCES_DIR /robot/resources
+ENV ROBOT_PAGES_DIR /robot/pages
 ENV ROBOT_TESTS_DIR /robot/tests
 ENV ROBOT_WORK_DIR /robot
 ENV ROBOT_LOGS_DIR /robot/logs
 
 # Create directories
 RUN mkdir -p ${ROBOT_RESOURCES_DIR}
+RUN mkdir -p ${ROBOT_PAGES_DIR}
 RUN mkdir -p ${ROBOT_TESTS_DIR}
 RUN mkdir -p ${ROBOT_WORK_DIR}
 RUN mkdir -p ${ROBOT_LOGS_DIR}
@@ -18,6 +20,7 @@ RUN mkdir -p ${ROBOT_LOGS_DIR}
 # Copy the tests to the tests directory
 COPY ./tests ${ROBOT_TESTS_DIR}
 COPY ./resources ${ROBOT_RESOURCES_DIR}
+COPY ./pages ${ROBOT_PAGES_DIR}
 COPY requirements.txt ${ROBOT_WORK_DIR}/requirements.txt
 COPY Makefile ${ROBOT_WORK_DIR}/Makefile
 COPY make.exe ${ROBOT_WORK_DIR}/make.exe

@@ -4,12 +4,13 @@ Library     LambdaTestStatus.py
 
 
 *** Variables ***
+${LATENCY}          500
 ${TIMEOUT}          3000
-# ${DEBUG_BROWSER}    headlesschrome
-${DEBUG_BROWSER}    chrome
+${DEBUG_BROWSER}    headlesschrome
+# ${DEBUG_BROWSER}    chrome
 ${USER}             %{LT_USERNAME=}
 ${KEY}              %{LT_ACCESS_KEY=}
-${TEST_URL}         https://lambdatest.github.io/sample-todo-app/
+${TEST_URL}         https://near.testnet.frontend.v2.zeropool.network/register
 
 
 *** Keywords ***
@@ -21,6 +22,7 @@ Open test browser
     Log To Console    message=Capabilities: ${CAPABILITIES}
 
     IF    ${DEBUG}
+        # IF    True == True
         Log To Console    message=Debug Browser: ${DEBUG_BROWSER}
         Open Browser    ${url}    ${DEBUG_BROWSER}
     ELSE
@@ -41,30 +43,17 @@ Close test browser
         Close all browsers
     END
 
-# Init Test Sute Variables
-    # ${VARIABLES}=    Get Variables    no_decoration=Yes
-
-    # Set Suite Variable    ${VARIABLES}
-    # Set Suite Variable    ${BROWSER}
-    # Set Suite Variable    ${DEBUG}
-
-    # ${browserName}=    Get From Dictionary    ${variables}    'browserName'    ''
-    # ${platform}=    Get From Dictionary    ${variables}    'platform'    ''
-    # ${version}=    Get From Dictionary    ${variables}    'version'    ''
-    # ${visual}=    Get From Dictionary    ${variables}    'visual'    ''
-    # ${network}=    Get From Dictionary    ${variables}    'network'    ''
-    # ${console}=    Get From Dictionary    ${variables}    'console'    ''
-
 Init Test Sute Variables
     ${VARIABLES}=    Get Variables    no_decoration=Yes
 
+    ${robotBrowser}=    Evaluate    $VARIABLES.get('ROBOT_BROWSER', '')
     ${browserName}=    Evaluate    $VARIABLES.get('browserName', '')
     ${platform}=    Evaluate    $VARIABLES.get('platform', '')
     ${version}=    Evaluate    $VARIABLES.get('version', '')
     ${visual}=    Evaluate    $VARIABLES.get('visual', '')
     ${network}=    Evaluate    $VARIABLES.get('network', '')
     ${console}=    Evaluate    $VARIABLES.get('console', '')
-    ${robotBrowser}=    Evaluate    $VARIABLES.get('ROBOT_BROWSER', '')
+    # ${networkConditions}=    Set Variable    latency: ${LATENCY}
 
     @{_tmp}=    Create List
     ...    browserName: ${browserName},
@@ -73,6 +62,7 @@ Init Test Sute Variables
     ...    network: ${network},
     ...    visual: ${visual},
     ...    console: ${console},
+    # ...    networkConditions: ${networkConditions},
     ...    name: Zeropool e2e on LambdaTest
 
     ${CAPABILITIES}=    Set Variable    ${EMPTY.join(${_tmp})}

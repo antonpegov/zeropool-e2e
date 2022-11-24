@@ -1,5 +1,6 @@
 docker-compose.yaml
 interactive_console_output.xml
+selenium-screenshot-*.*
 output.xml
 report.html
 log.html
